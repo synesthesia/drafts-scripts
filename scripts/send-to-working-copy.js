@@ -1,4 +1,4 @@
-
+// adapted from https://actions.getdrafts.com/a/1Pe
 (() => {
 
 	const settings = Credential.create("Working Copy Notes","Repo information and URL key for Working Copy notes");
