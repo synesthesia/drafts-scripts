@@ -25,9 +25,18 @@ const slugbase = title.toLowerCase().replace(/\s/g, "-");
 
 
 const datestr = `${posttime.getFullYear()}-${pad(posttime.getMonth() + 1)}-${pad(posttime.getDate())}`;
-const timestr = `${pad(posttime.getHours())}:${pad(posttime.getMinutes())}`;
-const slug = `${datestr}-${slugbase}`;
-const postdate = `${datestr}T${timestr}:00`;
+const timestr = `${pad(posttime.getHours())}:${pad(posttime.getMinutes())}:00`;
+const slug = `${datestr}-${slugbase}`
+
+
+const pdOffset = posttime.getTimezoneOffset();
+const offsetChar = pdOffset >= 0 ? '+' : '-';
+var pdHours = Math.floor(pdOffset/60);
+console.log(pdHours);
+pdHours = pdHours >= 0 ? pdHours : pdHours * -1;
+console.log(pdHours);
+const tzString = `${offsetChar}${pad(pdHours)}:00`;
+const postdate = `${datestr}T${timestr}${tzString}`;
 
 const fn = `${slug}.md`;
 const link = null;
@@ -39,7 +48,6 @@ const yaml = {
     slug: `"${slug}"`,
     featured: false,
     draft: false,
-    date: `${datestr} ${timestr}`,
     title: `"${title}"`,
     subtitle: "",
     summary: "",
