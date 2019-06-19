@@ -53,7 +53,7 @@ const yaml = {
     summary: "",
     authors: `["${author}"]`,
     categories: `["quick notes"]`,
-    tags: `[${tags}]`,
+    tags: `${JSON.stringify(tags)}`,
     date: postdate // e.g. 2019-06-17T11:58:58+01:00
 };
 
