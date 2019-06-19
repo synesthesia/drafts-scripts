@@ -20,7 +20,7 @@ const base = 'https://api.github.com';
 // const txt = draft.content;
 const posttime = new Date();
 const title = draft.title;  
-const txt = draft.content.replace(/^(`${title}`)/,"");
+const txt = draft.content.replace(/^#\s*(`${title}`)/,"");
 const tags = draft.tags;
 const slugbase = title.toLowerCase().replace(/\s/g, "-");
 
