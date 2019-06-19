@@ -6,7 +6,7 @@ const credential = Credential.create("GitHub blog repo", "The repo name, and its
 credential.addTextField("username", "GitHub Username");
 credential.addTextField('repo', 'Repo name');
 credential.addPasswordField("key", "GitHub personal access token");
-credential.addtextField('author', 'Author');
+credential.addTextField('author', 'Author');
 credential.authorize();
 
 const githubKey = credential.getValue('key');
