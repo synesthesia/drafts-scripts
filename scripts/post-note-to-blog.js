@@ -36,16 +36,16 @@ const link = null;
 
 const yaml = {
     type: 'note',
-    slug: slug,
+    slug: `"${slug}"`,
     featured: false,
     draft: false,
     date: `${datestr} ${timestr}`,
-    title: title,
+    title: `"${title}"`,
     subtitle: "",
     summary: "",
-    authors: [`${author}`],
-    categories: ["quick notes"],
-    tags: tags,
+    authors: `["${author}"]`,
+    categories: `["quick notes"]`,
+    tags: `[${tags}]`,
     date: postdate // e.g. 2019-06-17T11:58:58+01:00
 };
 
