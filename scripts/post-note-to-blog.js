@@ -1,37 +1,52 @@
 // adapted from https://forums.getdrafts.com/t/script-step-post-to-github-without-working-copy/3594
+// post to notes on Hugo blog
 
-
-const credential = Credential.create("GitHub blog repo", "The repo name, and its credentials, hosting the Jekyll blog.");
+const credential = Credential.create("GitHub blog repo", "The repo name, and its credentials, hosting the Hugo blog source");
 
 credential.addTextField("username", "GitHub Username");
 credential.addTextField('repo', 'Repo name');
 credential.addPasswordField("key", "GitHub personal access token");
-
+credential.addtextField('author', 'Author');
 credential.authorize();
 
 const githubKey = credential.getValue('key');
 const githubUser = credential.getValue('username');
 const repo = credential.getValue('repo');
+const author = credential.getValue('author');
 
 const http = HTTP.create(); // create HTTP object
 const base = 'https://api.github.com';
 
 const txt = draft.content;
 const posttime = new Date();
+const title = draft.title;  
+const tags = draft.tags;
+const slugbase = title.toLowerCase().replace(/\s/g, "-");
+
 
 const datestr = `${posttime.getFullYear()}-${pad(posttime.getMonth() + 1)}-${pad(posttime.getDate())}`;
 const timestr = `${pad(posttime.getHours())}:${pad(posttime.getMinutes())}`;
-const slug = String((posttime.getHours() * 60 * 60) + (posttime.getMinutes() * 60) + posttime.getSeconds());
+const slug = `${datestr}-${slugbase}`;
+const postdate = `${datestr}T${timestr}:00`;
 
-const fn = `${datestr}-${slug}.markdown`;
+const fn = `${slug}.md`;
+const link = null;
 
-const link = getLink();
+//const link = getLink();
 
 const yaml = {
-    layout: 'post',
+    type: 'note',
+    slug: slug,
+    featured: false,
+    draft: false,
     date: `${datestr} ${timestr}`,
-    category: 'micropost',
-    title: '""'
+    title: title,
+    subtitle: "",
+    summary: "",
+    authors: [`${author}`],
+    categories: ["quick notes"],
+    tags: tags,
+    date: postdate // e.g. 2019-06-17T11:58:58+01:00
 };
 
 if (link) {
@@ -49,7 +64,7 @@ preamble += "---\n\n";
 const doc = `${preamble}${txt}`;
 
 const options = {
-    url: `https://api.github.com/repos/${githubUser}/${repo}/contents/_posts/${fn}`,
+    url: `https://api.github.com/repos/${githubUser}/${repo}/contents/content/note/${fn}`,
     method: 'PUT',
     data: {
         message: `micropost ${datestr}`,
