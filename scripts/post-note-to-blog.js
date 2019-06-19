@@ -17,9 +17,10 @@ const author = credential.getValue('author');
 const http = HTTP.create(); // create HTTP object
 const base = 'https://api.github.com';
 
-const txt = draft.content;
+// const txt = draft.content;
 const posttime = new Date();
 const title = draft.title;  
+const txt = draft.content.replace(/^(`${title}`)/,"");
 const tags = draft.tags;
 const slugbase = title.toLowerCase().replace(/\s/g, "-");
 
