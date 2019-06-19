@@ -30,7 +30,7 @@ const slug = `${datestr}-${slugbase}`
 
 
 const pdOffset = posttime.getTimezoneOffset();
-const offsetChar = pdOffset >= 0 ? '+' : '-';
+const offsetChar = pdOffset >= 0 ? '-' : '+';
 var pdHours = Math.floor(pdOffset/60);
 console.log(pdHours);
 pdHours = pdHours >= 0 ? pdHours : pdHours * -1;
