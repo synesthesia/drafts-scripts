@@ -48,7 +48,7 @@ const link = null;
 //const link = getLink();
 
 const yaml = {
-    type: 'note',
+    type: 'post',
     slug: `"${slug}"`,
     featured: false,
     draft: true,
