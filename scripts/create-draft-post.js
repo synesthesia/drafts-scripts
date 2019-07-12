@@ -30,7 +30,8 @@ const slugbase = title.toLowerCase().replace(/\s/g, "-");
 
 const datestr = `${posttime.getFullYear()}-${pad(posttime.getMonth() + 1)}-${pad(posttime.getDate())}`;
 const timestr = `${pad(posttime.getHours())}:${pad(posttime.getMinutes())}:00`;
-const slug = `${datestr}-${slugbase}`
+const slug = `${datestr}-${slugbase}`;
+const yr = `${posttime.getFullYear()}`;
 
 
 const pdOffset = posttime.getTimezoneOffset();
@@ -77,7 +78,7 @@ preamble += "---\n\n";
 const doc = `${preamble}${txt}`;
 
 const options = {
-    url: `https://api.github.com/repos/${githubUser}/${repo}/contents/content/post/${folder}/index.md`,
+    url: `https://api.github.com/repos/${githubUser}/${repo}/contents/content/post/${yr}/${folder}/index.md`,
     method: 'PUT',
     data: {
         message: `micropost ${datestr}`,
