@@ -43,13 +43,14 @@ const tzString = `${offsetChar}${pad(pdHours)}:00`;
 const postdate = `${datestr}T${timestr}${tzString}`;
 
 const fn = `${slug}.md`;
+const folder =  `${datestr}-${slugbase}`;
 const link = null;
 
 //const link = getLink();
 
 const yaml = {
     type: 'post',
-    slug: `"${slug}"`,
+    slug: `"${slugbase}"`,
     featured: false,
     draft: true,
     title: `"${title}"`,
@@ -76,7 +77,7 @@ preamble += "---\n\n";
 const doc = `${preamble}${txt}`;
 
 const options = {
-    url: `https://api.github.com/repos/${githubUser}/${repo}/contents/content/post/${fn}/index.md`,
+    url: `https://api.github.com/repos/${githubUser}/${repo}/contents/content/post/${folder}/index.md`,
     method: 'PUT',
     data: {
         message: `micropost ${datestr}`,
